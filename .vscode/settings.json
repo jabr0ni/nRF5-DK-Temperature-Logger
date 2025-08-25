@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "util_internal.h": "c"
+    },
+    "nrf-connect.applications": [
+        "${workspaceFolder}"
+    ]
+}
