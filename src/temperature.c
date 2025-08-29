@@ -11,7 +11,7 @@
  */
 K_WORK_DEFINE(get_temperature_work, getTemperature_Handler);
 
-static temperature_data_t temperature_data_array[MAX_ENTRIES];
+static temperature_data_t temperature_data_array[MAX_SAMPLES];
 temperature_data_t temperature_data;
 
 const struct k_work *getTemperatureWork_Handler()
@@ -22,6 +22,7 @@ const struct k_work *getTemperatureWork_Handler()
 void getDieTemperature()
 {
 	static uint8_t index = 0;
+	static uint8_t i = 0;
     struct sensor_value value;
 	int rc;
 
@@ -39,7 +40,7 @@ void getDieTemperature()
 		}
 	}
 	
-    temperature_data.timestamp = k_uptime_get();
+    temperature_data.timestamp = i++;//k_uptime_get();
     temperature_data.temperature = sensor_value_to_double(&value);
 	
 	printf("%llu Temperature: %f C\n", temperature_data.timestamp, temperature_data.temperature);
@@ -55,7 +56,7 @@ void getDieTemperature()
 	 */
 
 	temperature_data_array[index] = temperature_data;
-	index = (index + 1) % MAX_ENTRIES; // wrap around if exceeds max
+	index = (index + 1) % MAX_SAMPLES; // wrap around if exceeds max
 }
 
 void getTemperature_Handler(struct k_work *work)

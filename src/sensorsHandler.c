@@ -1,4 +1,3 @@
-#include "main.h"
 #include "sensorsHandler.h"
 
 const struct device *const sensors[] = {LISTIFY(16, DIE_TEMPERATURE_SENSOR, ())};

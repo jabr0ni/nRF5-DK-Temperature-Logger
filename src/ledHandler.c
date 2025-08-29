@@ -1,7 +1,9 @@
 #include "ledHandler.h"
 
+// Get LED configuration from the devicetree
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
+// Configure LED GPIO
 void initLED()
 {
     if (!device_is_ready(led.port)) {

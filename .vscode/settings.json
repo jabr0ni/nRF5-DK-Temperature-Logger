@@ -4,5 +4,18 @@
     },
     "nrf-connect.applications": [
         "${workspaceFolder}"
-    ]
+    ],
+    "include path": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/zephyr/include/**",
+        "${workspaceFolder}/modules/**",
+        "${workspaceFolder}/nrf/include/**",
+        "${workspaceFolder}/nrf/subsys/**",
+        "${workspaceFolder}/nrf/lib/**",
+        "${workspaceFolder}/nrf/drivers/**",
+        "${workspaceFolder}/nrf/soc/**",
+        "${workspaceFolder}/nrf/hal/**",
+        "${workspaceFolder}/nrf/ext/**"
+    ],
+    
 }

@@ -117,10 +117,10 @@ void logTemperatureButton_pressed(const struct device *dev, struct gpio_callback
         k_timer_stop(&temperature_timer);
 
         // Get temperature data array and write to flash
+        // @todo write dynamic lengths based on number of samples collected
         temperature_data_t *temperature_data_array = getTemperatureDataArray();
-
-        // Crashing in here
-        // writeToFlash((uint8_t*)&temperature_data_array, 64, getOffset());
+        
+        writeToFlash((uint8_t*)&temperature_data_array[0], ENTRY_SIZE * MAX_SAMPLES, getOffset());
     }
 }
 
@@ -133,15 +133,5 @@ void eraseFlashButton_pressed(const struct device *dev, struct gpio_callback *cb
 // Callback for  print contents of flash buffer to console
 void dumpFlashButton_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
-    // read flash contents and print to console
-    for (int i = 0; i < MAX_ENTRIES; i++) {
-        uint8_t data[ENTRY_SIZE];
-        readFromFlash(data, ENTRY_SIZE, i * ENTRY_SIZE);
-        temperature_data_t *tempData = (temperature_data_t *)data;
-        if (tempData->timestamp == 0xFFFFFFFFFFFFFFFF) {
-            // reached end of valid data
-            break;
-        }
-        printk("Entry %d: Temp = %.2f C, Timestamp = %lld\n", i, tempData->temperature, tempData->timestamp);
-    }
+    printFlashContents();
 }

@@ -1,5 +1,4 @@
 #include "timers.h"
-#include "main.h"
 
 struct k_timer led_toggle_timer, temperature_timer;
 
