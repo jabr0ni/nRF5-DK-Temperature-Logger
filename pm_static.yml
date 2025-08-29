@@ -1,0 +1,4 @@
+rolling_buffer:
+   address: 0x7F000
+   size: 0x1000
+   region: flash_primary
